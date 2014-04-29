@@ -1,0 +1,17 @@
+---
+# - include: ssh.yml
+# - include: firewall.yml
+
+- name: Create {{  item.name }} user account
+  user: name={{ item.name }} comment="{{ item.fullname }}" uid={{ item.uid }} state=present groups={{ item.groups }}
+  with_items: user
+  tags: xen
+
+- name: Copy ssh public key
+  authorized_key: user={{ item.name }} state=present key="{{ item.pubkey }}"
+  with_items: user
+  tags: xen
+
+- name: Allow passwordless sudo for wheel group
+  lineinfile: "dest=/etc/sudoers regexp='^(# )?%wheel        ALL=(ALL)       NOPASSWD: ALL' line='%wheel        ALL=(ALL)       NOPASSWD: ALL'"
+  tags: xen

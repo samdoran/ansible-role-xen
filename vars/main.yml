@@ -1,0 +1,7 @@
+---
+user:
+  - name: sdoran
+    fullname: Sam Doran
+    uid: 577
+    groups: wheel
+    pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD5dTfkZKT/p1Lta7UzZv6kK3xtZj8fQjzLxxf29CeyAmgOwVrTjpzL82R34m/fwJA5vsa+66OwNtf+A5MJDrf55jNwpvxAL3QGZPsUqPJz1JkHpXAoUsgZMa1ckOt27f++QsZ18bbSVmgOp+rKSS1kX9CPLbmQk0CxjeCHLOclKMlKq+VPztUqhOp0MivCqo3YJ2ZSBPMQFywhZ4ueDL0VpLHv5cK00fQngAbb8MyYMbtHIg7w0V/F5JP4UdFjLj46Kslh32jdIURHVj+noPjM16Y+FoUN8hLMWWy9RCNYoA8IKp0IhpJlU+bUCFsppsICLTjRivILaKP+akD/03oP"

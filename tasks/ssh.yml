@@ -1,0 +1,44 @@
+---
+# SSH Configuration
+- name: Set ssh port
+  lineinfile: dest=/etc/ssh/sshd_config state=present regexp='^(#)?Port \d' line='Port {{ ssh_port }}'
+  tags: [ 'ssh' , 'config' ]
+  notify: restart ssh
+
+- name: Copy login banner to /etc/issue
+  copy: src=etc-issue dest=/etc/issue owner=root group=root mode=0644
+  tags: [ 'ssh' , 'config' ]
+
+- name: Copy login banner to /etc/issue.net
+  copy: src=etc-issue dest=/etc/issue.net owner=root group=root mode=0644
+  tags: [ 'ssh' , 'config' ]
+
+- name: SSH user protocol 2
+  lineinfile: dest=/etc/ssh/sshd_config state=present regexp='^(#)?Protocol \d' line='Protocol 2'
+  tags: [ 'ssh' , 'config' ]
+  notify: restart ssh
+
+- name: SSH deny root login
+  lineinfile: dest=/etc/ssh/sshd_config state=present regexp='^(#)?PermitRootLogin' line='PermitRootLogin no'
+  tags: [ 'ssh' , 'config' ]
+  notify: restart ssh
+
+- name: SSH deny password login
+  lineinfile: dest=/etc/ssh/sshd_config state=present regexp='^(#)?PasswordAuthentication' line='PasswordAuthentication no'
+  tags: [ 'ssh' , 'config' ]
+  notify: restart ssh
+
+- name: SSH show banner on login
+  lineinfile: dest=/etc/ssh/sshd_config state=present insertafter='^#Banner' line='Banner /etc/issue.net'
+  tags: [ 'ssh' , 'config' ]
+  notify: restart ssh
+
+- name: SSH disable GSSAPI auth
+  lineinfile: dest=/etc/ssh/sshd_config state=present regexp='^GSSAPIAuthentication' line='GSSAPIAuthentication no'
+  tags: [ 'ssh' , 'config' ]
+  notify: restart ssh
+
+- name: SSH disable reverse DNS
+  lineinfile: dest=/etc/ssh/sshd_config state=present regexp='^(#)?UseDNS' line='UseDNS no'
+  tags: [ 'ssh' , 'config' ]
+  notify: restart ssh
