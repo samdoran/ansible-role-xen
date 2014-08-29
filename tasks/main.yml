@@ -1,6 +1,6 @@
 ---
 # - include: ssh.yml
-# - include: firewall.yml
+- include: firewall.yml
 
 - name: Create {{  item.name }} user account
   user: name={{ item.name }} comment="{{ item.fullname }}" uid={{ item.uid }} state=present groups={{ item.groups }}
