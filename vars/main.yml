@@ -1,7 +1,34 @@
 ---
-user:
-  - name: sdoran
-    fullname: Sam Doran
-    uid: 577
-    groups: wheel
-    pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD5dTfkZKT/p1Lta7UzZv6kK3xtZj8fQjzLxxf29CeyAmgOwVrTjpzL82R34m/fwJA5vsa+66OwNtf+A5MJDrf55jNwpvxAL3QGZPsUqPJz1JkHpXAoUsgZMa1ckOt27f++QsZ18bbSVmgOp+rKSS1kX9CPLbmQk0CxjeCHLOclKMlKq+VPztUqhOp0MivCqo3YJ2ZSBPMQFywhZ4ueDL0VpLHv5cK00fQngAbb8MyYMbtHIg7w0V/F5JP4UdFjLj46Kslh32jdIURHVj+noPjM16Y+FoUN8hLMWWy9RCNYoA8IKp0IhpJlU+bUCFsppsICLTjRivILaKP+akD/03oP"
+xen_kernel_settings:
+  - name: net.ipv4.tcp_max_syn_backlog
+    value: 4096
+
+  - name: net.ipv4.tcp_syncookies
+    value: 1
+
+  - name: net.ipv4.conf.all.rp_filter
+    value: 1
+
+  - name: net.ipv4.conf.all.accept_source_route
+    value: 0
+
+  - name: net.ipv4.conf.all.accept_redirects
+    value: 0
+
+  - name: net.ipv4.conf.all.secure_redirects
+    value: 0
+
+  - name: net.ipv4.conf.default.rp_filter
+    value: 1
+
+  - name: net.ipv4.conf.default.accept_source_route
+    value: 0
+
+  - name: net.ipv4.conf.default.accept_redirects
+    value: 0
+
+  - name: net.ipv4.conf.default.secure_redirects
+    value: 0
+
+  - name: net.ipv4.icmp_echo_ignore_broadcasts
+    value: 1

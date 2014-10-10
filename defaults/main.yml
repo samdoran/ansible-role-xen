@@ -1,2 +1,2 @@
 ---
-# defaults file for foo
+xen_change_extlinux_password: False
