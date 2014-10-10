@@ -1,4 +1,8 @@
 ---
+- name: Install yum-utils
+  yum: name=yum-utils state=present enablerepo=base
+  tags: [ 'xen' , 'yum' ]
+
 - name: Copy firewall rules
   template: backup=yes src=etc-sysconfig-iptables.j2 dest=/etc/sysconfig/iptables owner=root group=root mode=0600
   notify: restart iptables
@@ -22,6 +26,11 @@
   notify: restart ssh
   tags: [ 'ssh' , 'config' ]
 
+- name: Update ssh
+  yum: name=openssh state=latest enablerepo=base
+  notify: restart ssh
+  tags: [ 'xen' , 'yum' ]
+
 - name: Allow passwordless sudo for wheel group
   lineinfile: "dest=/etc/sudoers regexp='%wheel.*NOPASSWD' line='%wheel        ALL=(ALL)       NOPASSWD: ALL'"
   tags: xen
@@ -31,8 +40,8 @@
   tags: [ 'xen' , 'config' ]
 
 - name: Require password for single user mode
-  lineinfile: "state=present backup=yes dest=/etc/inittab line='~~:S:wait:/sbin/sulogin'"
-  tags: [ 'xet' , 'single_user_mode' ]
+  lineinfile: "state=present backup=yes dest=/etc/inittab line='~:S:wait:/sbin/sulogin'"
+  tags: [ 'xen' , 'single_user_mode' ]
 
 
 # Check for the presence of a bootloader password.
@@ -48,6 +57,7 @@
   lineinfile: "state=present backup=yes dest=/boot/extlinux.conf regexp='passwd' line='menu master passwd {{ xen_bootloader_password }}' insertafter='^timeout'"
   when: extlinux_password_check.rc != 0 or xen_change_extlinux_password
   tags: [ 'xen' , 'bootloader_password' ]
+
 
 - name: Set ownership and permissions on /boot/extlinux.conf
   file: path=/boot/extlinux.conf owner=root group=root mode=0600
