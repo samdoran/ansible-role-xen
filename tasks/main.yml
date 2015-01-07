@@ -66,7 +66,7 @@
     state: present
     backup: yes
     dest: "/etc/sudoers"
-    regexp: '^Defaults   !visiblepw'
+    insertafter: '^Defaults   !visiblepw'
     line: 'Defaults   secure_path = /opt/xensource/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
   tags: [ 'xen' , 'sudoers' ]
 
@@ -75,8 +75,8 @@
     state: present
     backup: yes
     dest: /etc/pam.d/su
-    regexp: '^#?auth.*required.*pam_wheel\\.so'
-    line: 'auth           required        pam_wheel.so use_uid'
+    regexp: '^#?auth.*required.*pam_wheel\.so'
+    line: 'auth            required        pam_wheel.so use_uid'
   tags: [ 'xen' , 'config' ]
 
 - name: Require password for single user mode
@@ -105,7 +105,7 @@
     regexp: 'passwd'
     line: 'menu master passwd {{ xen_bootloader_password }}'
     insertafter: '^timeout'
-  when: extlinux_password_check.rc != '0' or xen_change_extlinux_password
+  when: extlinux_password_check.rc != 0 or xen_change_extlinux_password
   tags: [ 'xen' , 'bootloader_password' ]
 
 
