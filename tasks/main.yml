@@ -1,12 +1,10 @@
 ---
-- name: Install yum-utils
-  yum: name=yum-utils state=present enablerepo=base
+- name: Install packages
+  yum: name={{ item }} state=present enablerepo=base
+  with_items:
+    - yum-utils
+    - vim
   tags: [ 'xen' , 'yum' ]
-
-- name: Copy firewall rules
-  template: backup=yes src=etc-sysconfig-iptables.j2 dest=/etc/sysconfig/iptables owner=root group=root mode=0600
-  notify: restart iptables
-  tags: firewall
 
 - name: Copy ntp.conf
   template: backup=yes src=ntp.conf.j2 dest=/etc/nty.conf owner=root group=root mode=0644

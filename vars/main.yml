@@ -32,3 +32,6 @@ xen_kernel_settings:
 
   - name: net.ipv4.icmp_echo_ignore_broadcasts
     value: 1
+
+  - name: net.ipv4.tcp_timestamps
+    value: 0
