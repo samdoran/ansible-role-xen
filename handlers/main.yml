@@ -10,3 +10,8 @@
 
 - name: run pwconv
   command: /usr/sbin/pwconv
+
+- name: restart xapi
+  command: /opt/xensource/bin/xe-toolstack-restart
+  environment:
+    PATH: "/opt/xensource/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin"
