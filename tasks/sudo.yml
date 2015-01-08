@@ -1,0 +1,25 @@
+---
+- name: Allow passwordless sudo for wheel group
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: '%wheel.*NOPASSWD'
+    line: '%wheel        ALL=(ALL)       NOPASSWD: ALL'
+  tags: [ 'xen' , 'sudoers' ]
+
+- name: Set secure_path in /etc/sudoers
+  lineinfile:
+    state: present
+    backup: yes
+    dest: "/etc/sudoers"
+    insertafter: '^Defaults   !visiblepw'
+    line: 'Defaults   secure_path = /opt/xensource/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
+  tags: [ 'xen' , 'sudoers' ]
+
+- name: Limit access to su command
+  lineinfile:
+    state: present
+    backup: yes
+    dest: /etc/pam.d/su
+    regexp: '^#?auth.*required.*pam_wheel\.so'
+    line: 'auth            required        pam_wheel.so use_uid'
+  tags: [ 'xen' , 'config' ]

@@ -1,0 +1,37 @@
+---
+- name: Copy login banner to /etc/issue
+  copy:
+    src: etc-issue
+    dest: /etc/issue
+    owner: root
+    group: root
+    mode: 0644
+  tags: [ 'ssh' , 'config' ]
+
+- name: Copy login banner to /etc/issue.net
+  copy:
+    src: etc-issue
+    dest: /etc/issue.net
+    owner: root
+    group: root
+    mode: 0644
+  tags: [ 'ssh' , 'config' ]
+
+- name: Copy sshd_config
+  template:
+    backup: yes
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart ssh
+  tags: [ 'ssh' , 'config' ]
+
+- name: Update ssh
+  yum:
+    name: openssh
+    state: latest
+    enablerepo: base
+  notify: restart ssh
+  tags: [ 'xen' , 'yum' ]
