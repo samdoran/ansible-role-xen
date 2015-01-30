@@ -1,0 +1,19 @@
+---
+- name: Copy SSL pem file
+  template:
+    src: xapi-ssl.pem.j2
+    dest: /etc/xensource/xapi-ssl.pem
+    owner: root
+    group: root
+    mode: 0400
+  notify: restart xapissl
+
+- name: Improve SSL configuration
+  lineinfile:
+    state: present
+    backup: yes
+    dest: /etc/init.d/xapissl
+    regexp: '^ciphers'
+    line: 'ciphers = !SSLv2:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:RSA+AES256-SHA:RSA+AES128-SHA:!aNULL:!MD5:!DSS:!RC4'
+  notify: restart xapi
+
