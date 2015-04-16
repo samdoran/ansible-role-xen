@@ -57,7 +57,7 @@ IgnoreRhosts yes
 # To disable tunneled clear text passwords, change to no here!
 #PasswordAuthentication yes
 PermitEmptyPasswords no
-PasswordAuthentication yes
+PasswordAuthentication no
 
 # Change to no to disable s/key passwords
 #ChallengeResponseAuthentication yes
@@ -96,7 +96,7 @@ AcceptEnv LC_IDENTIFICATION LC_ALL
 X11Forwarding yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes
-#PrintMotd yes
+PrintMotd no
 #PrintLastLog yes
 #TCPKeepAlive yes
 #UseLogin no
@@ -106,7 +106,7 @@ X11Forwarding yes
 ClientAliveInterval 900
 ClientAliveCountMax 0
 #ShowPatchLevel no
-#UseDNS yes
+UseDNS no
 #PidFile /var/run/sshd.pid
 #MaxStartups 10
 #PermitTunnel no

@@ -9,4 +9,5 @@
 - include: ntp.yml
 - include: ssh.yml
 - include: sudo.yml
+- { include: ssl.yml, when: xen_configure_ssl, tags: ssl }
 - include: harden.yml
