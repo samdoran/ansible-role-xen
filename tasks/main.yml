@@ -1,6 +1,10 @@
 ---
 - name: Install packages
-  yum: name={{ item }} state=present enablerepo=base
+  yum:
+    name: "{{ item }}"
+    state: present
+    enablerepo: base
+    disablerepo: citrix
   with_items:
     - yum-utils
     - vim-enhanced
